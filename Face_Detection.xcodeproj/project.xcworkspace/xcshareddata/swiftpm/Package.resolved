@@ -1,0 +1,24 @@
+{
+  "originHash" : "85eba36c45d200f865d7e66d60c815409ab2c7d4b0924622e2a5cafe4d8f0a50",
+  "pins" : [
+    {
+      "identity" : "kdtree",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Bersaelor/KDTree",
+      "state" : {
+        "revision" : "35d14064d48d92a0c2c1215b93a3118f558b2e6b",
+        "version" : "1.4.2"
+      }
+    },
+    {
+      "identity" : "snapkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SnapKit/SnapKit.git",
+      "state" : {
+        "revision" : "2842e6e84e82eb9a8dac0100ca90d9444b0307f4",
+        "version" : "5.7.1"
+      }
+    }
+  ],
+  "version" : 3
+}
