@@ -12,27 +12,12 @@ struct Vector {
     var name: String
     var vector: [Float]
     var distance: Float
-    
 }
 
 extension Vector {
     init(name: String, vector: [Float]) {
-        self.init(name: name,
-                  vector: vector,
-                  distance: 0)
+        self.init(name: name, vector: vector, distance: 0)
     }
-}
-extension Sequence where Iterator.Element: Hashable {
-    func uniq() -> [Iterator.Element] {
-        var seen = Set<Iterator.Element>()
-        return filter { seen.update(with: $0) == nil }
-    }
-}
-
-extension Vector : Hashable { }
-
-func == (lhs: Vector, rhs: Vector) -> Bool {
-    return lhs.vector == rhs.vector
 }
 
 class SavedVector: Object {

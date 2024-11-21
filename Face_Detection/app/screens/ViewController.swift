@@ -55,7 +55,7 @@ class ViewController: UIViewController {
     @objc func button3Tap() {
         let realm = try! Realm()
         try! realm.write {
-          realm.deleteAll()
+            realm.deleteAll()
         }
     }
     

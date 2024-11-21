@@ -7,13 +7,11 @@
 
 import UIKit
 import RealmSwift
-import CoreML
 import TensorFlowLite
 
 class VectorHelper {
     
     let realm = try! Realm()
-    var kMeanVectors = [Vector]()
     
     func analyseImage(image: UIImage?, completion: @escaping ([Float]) -> Void) {
         guard let modelPath = Bundle.main.path(forResource: "mobilefacenet", ofType: "tflite") else {
@@ -21,7 +19,7 @@ class VectorHelper {
         }
         
         guard let inputData = preprocessImage(image) else { return }
-
+        
         var interpreter: Interpreter
         do {
             interpreter = try Interpreter(modelPath: modelPath)
@@ -34,7 +32,6 @@ class VectorHelper {
                 return Array(UnsafeBufferPointer<Float32>(start: baseAddress.assumingMemoryBound(to: Float32.self),
                                                           count: outputTensor.shape.dimensions.reduce(1, *)))
             } as! [Float32]
-            print(outputData)
             completion(outputData)
         } catch {
             print(error.localizedDescription)
@@ -57,10 +54,10 @@ class VectorHelper {
               let pixelBuffer = resizedImage.toPixelBuffer() else {
             return nil
         }
-
+        
         var inputData = Data()
         let normalizedPixels = pixelBuffer.prefix(150528 / 4).map { Float($0) / 255.0 }
-
+        
         normalizedPixels.withUnsafeBufferPointer { bufferPointer in
             inputData.append(contentsOf: UnsafeRawBufferPointer(bufferPointer))
         }
@@ -90,7 +87,7 @@ class VectorHelper {
         analyseImage(image: image) { targetVector in
             for vector in  self.loadVector() {
                 let distance = self.cosineSimilarity(targetVector, vector.vector)
-                let dist = distance * distance
+                let dist = distance
                 if dist > 0.7 && result.distance < dist {
                     result = vector
                     result.distance = dist
@@ -98,22 +95,6 @@ class VectorHelper {
             }
         }
         return result
-    }
-    
-    func convertToArray(from mlMultiArray: MLMultiArray) -> [Double] {
-        
-        if let list = try? UnsafeBufferPointer<Double>(mlMultiArray) {
-            print(Array(list))
-            return Array(list)
-        }
-        return []
-    }
-    
-    func l2distance(_ feat1: [Double], _ feat2: [Double]) -> Double {
-        let dotProduct = zip(feat1, feat2).map { $0 * $1 }.reduce(0, +)
-        let magnitude1 = sqrt(feat1.map { $0 * $0 }.reduce(0, +))
-        let magnitude2 = sqrt(feat2.map { $0 * $0 }.reduce(0, +))
-        return dotProduct / (magnitude1 * magnitude2)
     }
     
     func arrayToString(array: [Float]) -> String {

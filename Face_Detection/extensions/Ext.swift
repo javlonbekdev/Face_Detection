@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import TensorFlowLite
 
 extension UIImage {
     /// Crop the image to be the required size.
@@ -53,42 +52,42 @@ extension UIImage {
     
     func toPixelBuffer() -> [UInt8]? {
         // Create a graphics context for resizing the image
-            UIGraphicsBeginImageContextWithOptions(size, false, 1.0)
+        UIGraphicsBeginImageContextWithOptions(size, false, 1.0)
         self.draw(in: CGRect(origin: .zero, size: size))
-            
-            // Get the resized image
-            guard let resizedImage = UIGraphicsGetImageFromCurrentImageContext(),
-                  let cgImage = resizedImage.cgImage else {
-                UIGraphicsEndImageContext()
-                return nil
-            }
+        
+        // Get the resized image
+        guard let resizedImage = UIGraphicsGetImageFromCurrentImageContext(),
+              let cgImage = resizedImage.cgImage else {
             UIGraphicsEndImageContext()
-            
-            // Create a buffer to hold pixel data
-            let width = Int(size.width)
-            let height = Int(size.height)
-            let bytesPerPixel = 4 // RGBA format
-            let bytesPerRow = bytesPerPixel * width
-            let totalBytes = height * bytesPerRow
-            var pixelData = [UInt8](repeating: 0, count: totalBytes)
-            
-            // Create a context to extract pixel data
-            guard let context = CGContext(
-                data: &pixelData,
-                width: width,
-                height: height,
-                bitsPerComponent: 8, // Each channel is 8 bits
-                bytesPerRow: bytesPerRow,
-                space: CGColorSpaceCreateDeviceRGB(),
-                bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue
-            ) else {
-                return nil
-            }
-            
-            // Draw the image into the context to populate pixel data
-            context.draw(cgImage, in: CGRect(origin: .zero, size: size))
-            
-            return pixelData
+            return nil
+        }
+        UIGraphicsEndImageContext()
+        
+        // Create a buffer to hold pixel data
+        let width = Int(size.width)
+        let height = Int(size.height)
+        let bytesPerPixel = 4 // RGBA format
+        let bytesPerRow = bytesPerPixel * width
+        let totalBytes = height * bytesPerRow
+        var pixelData = [UInt8](repeating: 0, count: totalBytes)
+        
+        // Create a context to extract pixel data
+        guard let context = CGContext(
+            data: &pixelData,
+            width: width,
+            height: height,
+            bitsPerComponent: 8, // Each channel is 8 bits
+            bytesPerRow: bytesPerRow,
+            space: CGColorSpaceCreateDeviceRGB(),
+            bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue
+        ) else {
+            return nil
+        }
+        
+        // Draw the image into the context to populate pixel data
+        context.draw(cgImage, in: CGRect(origin: .zero, size: size))
+        
+        return pixelData
     }
 }
 
