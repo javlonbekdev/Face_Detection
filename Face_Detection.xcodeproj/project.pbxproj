@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		4861C3C22CE9F15900C6F1F5 /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4861C3C12CE9F15900C6F1F5 /* Vector.swift */; };
 		4861C3C42CE9F18200C6F1F5 /* VectorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4861C3C32CE9F18200C6F1F5 /* VectorHelper.swift */; };
-		48B4D1F92CEC5F91004FB561 /* mobilefacenet.tflite in Resources */ = {isa = PBXBuildFile; fileRef = 48B4D1F82CEC5F91004FB561 /* mobilefacenet.tflite */; };
 		48F6C2E52CE5AD2B00E77C2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F6C2D52CE5AD2B00E77C2B /* AppDelegate.swift */; };
 		48F6C2E82CE5AD2B00E77C2B /* Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F6C2D92CE5AD2B00E77C2B /* Ext.swift */; };
 		48F6C2E92CE5AD2B00E77C2B /* LiveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F6C2DD2CE5AD2B00E77C2B /* LiveVC.swift */; };
@@ -21,6 +20,14 @@
 		48F6C2F02CE5AD2B00E77C2B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48F6C2DC2CE5AD2B00E77C2B /* LaunchScreen.storyboard */; };
 		48F6C2F12CE5AD2B00E77C2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48F6C2DF2CE5AD2B00E77C2B /* Main.storyboard */; };
 		48F6C2FB2CE5B78200E77C2B /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F6C2FA2CE5B78200E77C2B /* TextField.swift */; };
+		B2A9C8392D659A2F00748D84 /* TFLiteFaceRecognition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A9C8382D659A2F00748D84 /* TFLiteFaceRecognition.swift */; };
+		B2A9C83B2D65C4F500748D84 /* VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A9C83A2D65C4F500748D84 /* VC.swift */; };
+		B2DAE82F2D64C17200A43B00 /* facenetnew.tflite in Resources */ = {isa = PBXBuildFile; fileRef = B2DAE82E2D64C17200A43B00 /* facenetnew.tflite */; };
+		B2DAE8412D64C2B000A43B00 /* ANNDatabase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2DAE8362D64C2B000A43B00 /* ANNDatabase.cpp */; };
+		B2DAE8442D64C2B000A43B00 /* LSHTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2DAE83E2D64C2B000A43B00 /* LSHTable.cpp */; };
+		B2DAE8452D64C2B000A43B00 /* VectorOperations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2DAE8402D64C2B000A43B00 /* VectorOperations.cpp */; };
+		B2DAE8462D64C2B000A43B00 /* HashFunction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2DAE8392D64C2B000A43B00 /* HashFunction.cpp */; };
+		B2DAE8472D64C2B000A43B00 /* CMakeLists.txt in Resources */ = {isa = PBXBuildFile; fileRef = B2DAE8372D64C2B000A43B00 /* CMakeLists.txt */; };
 		C68997A024963CF51D55410C /* Pods_Face_Detection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67578A4773239502B8D11C93 /* Pods_Face_Detection.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,7 +36,6 @@
 		4861C3C12CE9F15900C6F1F5 /* Vector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
 		4861C3C32CE9F18200C6F1F5 /* VectorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorHelper.swift; sourceTree = "<group>"; };
 		489098702CC163160048E932 /* Face_Detection.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Face_Detection.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		48B4D1F82CEC5F91004FB561 /* mobilefacenet.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = mobilefacenet.tflite; sourceTree = "<group>"; };
 		48F6C2D52CE5AD2B00E77C2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		48F6C2D62CE5AD2B00E77C2B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		48F6C2D92CE5AD2B00E77C2B /* Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ext.swift; sourceTree = "<group>"; };
@@ -44,6 +50,19 @@
 		48F6C2FA2CE5B78200E77C2B /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		67578A4773239502B8D11C93 /* Pods_Face_Detection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Face_Detection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CBFE615DE310D5E7C2182E2 /* Pods-Face_Detection.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Face_Detection.debug.xcconfig"; path = "Target Support Files/Pods-Face_Detection/Pods-Face_Detection.debug.xcconfig"; sourceTree = "<group>"; };
+		B2A9C8382D659A2F00748D84 /* TFLiteFaceRecognition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFLiteFaceRecognition.swift; sourceTree = "<group>"; };
+		B2A9C83A2D65C4F500748D84 /* VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VC.swift; sourceTree = "<group>"; };
+		B2DAE82E2D64C17200A43B00 /* facenetnew.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = facenetnew.tflite; sourceTree = "<group>"; };
+		B2DAE8352D64C2B000A43B00 /* ANNDatabase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ANNDatabase.h; sourceTree = "<group>"; };
+		B2DAE8362D64C2B000A43B00 /* ANNDatabase.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ANNDatabase.cpp; sourceTree = "<group>"; };
+		B2DAE8372D64C2B000A43B00 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
+		B2DAE8382D64C2B000A43B00 /* HashFunction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HashFunction.h; sourceTree = "<group>"; };
+		B2DAE8392D64C2B000A43B00 /* HashFunction.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = HashFunction.cpp; sourceTree = "<group>"; };
+		B2DAE83D2D64C2B000A43B00 /* LSHTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSHTable.h; sourceTree = "<group>"; };
+		B2DAE83E2D64C2B000A43B00 /* LSHTable.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LSHTable.cpp; sourceTree = "<group>"; };
+		B2DAE83F2D64C2B000A43B00 /* VectorOperations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VectorOperations.h; sourceTree = "<group>"; };
+		B2DAE8402D64C2B000A43B00 /* VectorOperations.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = VectorOperations.cpp; sourceTree = "<group>"; };
+		B2DAE8482D64C2B200A43B00 /* Face_Detection-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Face_Detection-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +88,7 @@
 		480CFB012CEE17AB0074AE58 /* data */ = {
 			isa = PBXGroup;
 			children = (
-				48B4D1F82CEC5F91004FB561 /* mobilefacenet.tflite */,
+				B2DAE82E2D64C17200A43B00 /* facenetnew.tflite */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -141,6 +160,7 @@
 				48F6C2DD2CE5AD2B00E77C2B /* LiveVC.swift */,
 				48F6C2E02CE5AD2B00E77C2B /* NameAddVC.swift */,
 				48F6C2E32CE5AD2B00E77C2B /* ViewController.swift */,
+				B2A9C83A2D65C4F500748D84 /* VC.swift */,
 			);
 			path = screens;
 			sourceTree = "<group>";
@@ -150,8 +170,27 @@
 			children = (
 				48F6C2D92CE5AD2B00E77C2B /* Ext.swift */,
 				4861C3C32CE9F18200C6F1F5 /* VectorHelper.swift */,
+				B2A9C8382D659A2F00748D84 /* TFLiteFaceRecognition.swift */,
+				B2DAE8302D64C1DC00A43B00 /* cpp */,
 			);
 			path = extensions;
+			sourceTree = "<group>";
+		};
+		B2DAE8302D64C1DC00A43B00 /* cpp */ = {
+			isa = PBXGroup;
+			children = (
+				B2DAE8352D64C2B000A43B00 /* ANNDatabase.h */,
+				B2DAE8362D64C2B000A43B00 /* ANNDatabase.cpp */,
+				B2DAE8372D64C2B000A43B00 /* CMakeLists.txt */,
+				B2DAE8382D64C2B000A43B00 /* HashFunction.h */,
+				B2DAE8392D64C2B000A43B00 /* HashFunction.cpp */,
+				B2DAE83D2D64C2B000A43B00 /* LSHTable.h */,
+				B2DAE83E2D64C2B000A43B00 /* LSHTable.cpp */,
+				B2DAE83F2D64C2B000A43B00 /* VectorOperations.h */,
+				B2DAE8402D64C2B000A43B00 /* VectorOperations.cpp */,
+				B2DAE8482D64C2B200A43B00 /* Face_Detection-Bridging-Header.h */,
+			);
+			path = cpp;
 			sourceTree = "<group>";
 		};
 		C46376B55A316D025DADE589 /* Pods */ = {
@@ -206,7 +245,7 @@
 				TargetAttributes = {
 					4890986F2CC163160048E932 = {
 						CreatedOnToolsVersion = 16.0;
-						LastSwiftMigration = 1610;
+						LastSwiftMigration = 1620;
 					};
 				};
 			};
@@ -234,10 +273,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48B4D1F92CEC5F91004FB561 /* mobilefacenet.tflite in Resources */,
 				48F6C2EE2CE5AD2B00E77C2B /* Assets.xcassets in Resources */,
 				48F6C2F02CE5AD2B00E77C2B /* LaunchScreen.storyboard in Resources */,
+				B2DAE82F2D64C17200A43B00 /* facenetnew.tflite in Resources */,
 				48F6C2F12CE5AD2B00E77C2B /* Main.storyboard in Resources */,
+				B2DAE8472D64C2B000A43B00 /* CMakeLists.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,9 +351,15 @@
 				4861C3C22CE9F15900C6F1F5 /* Vector.swift in Sources */,
 				48F6C2E82CE5AD2B00E77C2B /* Ext.swift in Sources */,
 				48F6C2E92CE5AD2B00E77C2B /* LiveVC.swift in Sources */,
+				B2DAE8412D64C2B000A43B00 /* ANNDatabase.cpp in Sources */,
+				B2A9C8392D659A2F00748D84 /* TFLiteFaceRecognition.swift in Sources */,
+				B2DAE8442D64C2B000A43B00 /* LSHTable.cpp in Sources */,
+				B2DAE8452D64C2B000A43B00 /* VectorOperations.cpp in Sources */,
+				B2DAE8462D64C2B000A43B00 /* HashFunction.cpp in Sources */,
 				48F6C2EA2CE5AD2B00E77C2B /* NameAddVC.swift in Sources */,
 				48F6C2EB2CE5AD2B00E77C2B /* PhotoVC.swift in Sources */,
 				48F6C2FB2CE5B78200E77C2B /* TextField.swift in Sources */,
+				B2A9C83B2D65C4F500748D84 /* VC.swift in Sources */,
 				4861C3C42CE9F18200C6F1F5 /* VectorHelper.swift in Sources */,
 				48F6C2EC2CE5AD2B00E77C2B /* SceneDelegate.swift in Sources */,
 				48F6C2ED2CE5AD2B00E77C2B /* ViewController.swift in Sources */,
@@ -373,6 +419,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "javlonbek-dev.Face-Detection";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Face_Detection/extensions/cpp/Face_Detection-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -410,6 +457,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "javlonbek-dev.Face-Detection";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Face_Detection/extensions/cpp/Face_Detection-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

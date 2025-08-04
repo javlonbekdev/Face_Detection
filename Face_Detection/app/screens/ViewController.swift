@@ -22,7 +22,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         button1.addTarget(self, action: #selector(button1Tap), for: .touchUpInside)
         button2.addTarget(self, action: #selector(button2Tap), for: .touchUpInside)
-        button3.addTarget(self, action: #selector(button3Tap), for: .touchUpInside)
+        button3.addTarget(self, action: #selector(test), for: .touchUpInside)
     }
     
     override func viewDidLayoutSubviews() {
@@ -60,8 +60,8 @@ class ViewController: UIViewController {
     }
     
     @objc func test() {
-        let vc = NameAddVC()
-        vc.cropImage = .jav
+        let vc = FaceRecognitionViewController()
+//        vc.cropImage = .jav
         present(vc, animated: true)
     }
 }

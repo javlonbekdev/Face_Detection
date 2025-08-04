@@ -8,14 +8,38 @@
 import UIKit
 
 extension UIImage {
-    /// Crop the image to be the required size.
-    ///
-    /// - parameter bounds:    The bounds to which the new image should be cropped.
-    ///
-    /// - returns:             Cropped `UIImage`.
+    func toPixelBuffer(size: Int) -> CVPixelBuffer? {
+        let attributes: [String: Any] = [
+            kCVPixelBufferCGImageCompatibilityKey as String: true,
+            kCVPixelBufferCGBitmapContextCompatibilityKey as String: true
+        ]
+        
+        var pixelBuffer: CVPixelBuffer?
+        let status = CVPixelBufferCreate(kCFAllocatorDefault, size, size, kCVPixelFormatType_32BGRA, attributes as CFDictionary, &pixelBuffer)
+        
+        guard status == kCVReturnSuccess, let buffer = pixelBuffer else {
+            return nil
+        }
+        
+        CVPixelBufferLockBaseAddress(buffer, .readOnly)
+        let context = CGContext(
+            data: CVPixelBufferGetBaseAddress(buffer),
+            width: size,
+            height: size,
+            bitsPerComponent: 8,
+            bytesPerRow: CVPixelBufferGetBytesPerRow(buffer),
+            space: CGColorSpaceCreateDeviceRGB(),
+            bitmapInfo: CGImageAlphaInfo.noneSkipFirst.rawValue
+        )
+        
+        guard let cgImage = self.cgImage else { return nil }
+        context?.draw(cgImage, in: CGRect(x: 0, y: 0, width: size, height: size))
+        CVPixelBufferUnlockBaseAddress(buffer, .readOnly)
+        
+        return buffer
+    }
     
     func cropping(to bounds: CGRect) -> UIImage? {
-        // if bounds is entirely within image, do simple CGImage `cropping` …
         
         if CGRect(origin: .zero, size: size).contains(bounds),
            imageOrientation == .up,
@@ -36,12 +60,6 @@ extension UIImage {
         }
     }
     
-    /// Resize image
-    /// - Parameter size: Size to resize to
-    /// - Returns: Resized image
-    
-    // Load and preprocess the image
-    
     func resize(to size: CGSize) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(size, false, 1.0)
         self.draw(in: CGRect(origin: .zero, size: size))
@@ -50,8 +68,44 @@ extension UIImage {
         return resizedImage
     }
     
+    func toRGBPixelBuffer() -> [UInt8]? {
+        guard let cgImage = self.cgImage else { return nil }
+        
+        let width = 160
+        let height = 160
+        let bytesPerPixel = 4
+        let bytesPerRow = bytesPerPixel * width
+        let totalBytes = width * height * bytesPerPixel
+        
+        var rawData = [UInt8](repeating: 0, count: totalBytes)
+        
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let bitmapInfo = CGImageAlphaInfo.premultipliedLast.rawValue
+        
+        guard let context = CGContext(data: &rawData,
+                                      width: width,
+                                      height: height,
+                                      bitsPerComponent: 8,
+                                      bytesPerRow: bytesPerRow,
+                                      space: colorSpace,
+                                      bitmapInfo: bitmapInfo) else {
+            return nil
+        }
+        
+        context.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
+        
+        // ✅ Faqat RGB olish (RGBA bo'lsa, alpha kanalni o‘chiramiz)
+        var rgbData = [UInt8]()
+        for i in stride(from: 0, to: rawData.count, by: 4) {
+            rgbData.append(rawData[i])   // R
+            rgbData.append(rawData[i+1]) // G
+            rgbData.append(rawData[i+2]) // B
+        }
+        
+        return rgbData
+    }
+    
     func toPixelBuffer() -> [UInt8]? {
-        // Create a graphics context for resizing the image
         UIGraphicsBeginImageContextWithOptions(size, false, 1.0)
         self.draw(in: CGRect(origin: .zero, size: size))
         
@@ -84,7 +138,6 @@ extension UIImage {
             return nil
         }
         
-        // Draw the image into the context to populate pixel data
         context.draw(cgImage, in: CGRect(origin: .zero, size: size))
         
         return pixelData

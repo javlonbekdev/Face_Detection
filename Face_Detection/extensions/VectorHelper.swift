@@ -14,8 +14,8 @@ class VectorHelper {
     let realm = try! Realm()
     
     func analyseImage(image: UIImage?, completion: @escaping ([Float]) -> Void) {
-        guard let modelPath = Bundle.main.path(forResource: "mobilefacenet", ofType: "tflite") else {
-            fatalError("MobileFaceNet model not found.")
+        guard let modelPath = Bundle.main.path(forResource: "facenetnew", ofType: "tflite") else {
+            fatalError("facenet model not found.")
         }
         
         guard let inputData = preprocessImage(image) else { return }
@@ -32,10 +32,26 @@ class VectorHelper {
                 return Array(UnsafeBufferPointer<Float32>(start: baseAddress.assumingMemoryBound(to: Float32.self),
                                                           count: outputTensor.shape.dimensions.reduce(1, *)))
             } as! [Float32]
+            print(outputData)
             completion(outputData)
         } catch {
             print(error.localizedDescription)
         }
+    }
+    
+    func preprocessImage(_ image: UIImage?) -> Data? {
+        guard let resizedImage = image?.resize(to: .init(width: 160, height: 160)),
+              let pixelBuffer = resizedImage.toRGBPixelBuffer() else {
+            return nil
+        }
+        
+        var inputData = Data()
+        let normalizedPixels = pixelBuffer.map { Float($0) / 255.0 }
+        
+        normalizedPixels.withUnsafeBufferPointer { bufferPointer in
+            inputData.append(contentsOf: UnsafeRawBufferPointer(bufferPointer))
+        }
+        return inputData
     }
     
     func saveVector(name: String?, image: UIImage?) {
@@ -47,21 +63,6 @@ class VectorHelper {
                 self.realm.add(item)
             }
         }
-    }
-    
-    func preprocessImage(_ image: UIImage?) -> Data? {
-        guard let resizedImage = image?.resize(to: .init(width: 97, height: 97)),
-              let pixelBuffer = resizedImage.toPixelBuffer() else {
-            return nil
-        }
-        
-        var inputData = Data()
-        let normalizedPixels = pixelBuffer.prefix(150528 / 4).map { Float($0) / 255.0 }
-        
-        normalizedPixels.withUnsafeBufferPointer { bufferPointer in
-            inputData.append(contentsOf: UnsafeRawBufferPointer(bufferPointer))
-        }
-        return inputData
     }
     
     func loadVector() -> [Vector] {
